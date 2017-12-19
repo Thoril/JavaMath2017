@@ -9,10 +9,10 @@ class ListeNombresComplexesTest {
         }
 
         ListeNombresComplexes maListe = new ListeNombresComplexes(8, liste);
-        NombreComplexe[] retour = maListe.FFT();
+        maListe.FFT();
         System.out.printf("Resu \n");
         for(int i= 0; i<8; i++){
-            retour[i].affiche();
+            maListe.getSortie(i).affiche();
         }
 
     }
