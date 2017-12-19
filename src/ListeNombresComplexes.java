@@ -3,19 +3,6 @@ public class ListeNombresComplexes {
 
     private int taille;
     private NombreComplexe[] signalEntree;
-
-    public NombreComplexe getSignalEntree(int indice) {
-        return signalEntree[indice];
-    }
-
-    public void setSignalEntree(NombreComplexe[] signalEntree) {
-        this.signalEntree = signalEntree;
-    }
-
-    public NombreComplexe getSortie(int indice) {
-        return sortie[indice];
-    }
-
     private NombreComplexe[] sortie;
 
     public ListeNombresComplexes(int taille, NombreComplexe[] signal) {
@@ -29,6 +16,18 @@ public class ListeNombresComplexes {
 
     public void setTaille(int taille) {
         this.taille = taille;
+    }
+
+    public NombreComplexe getSignalEntree(int indice) {
+        return signalEntree[indice];
+    }
+
+    public void setSignalEntree(NombreComplexe[] signalEntree) {
+        this.signalEntree = signalEntree;
+    }
+
+    public NombreComplexe getSortie(int indice) {
+        return sortie[indice];
     }
 
     public void FFT(){
