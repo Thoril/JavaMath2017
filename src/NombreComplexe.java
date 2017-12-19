@@ -11,7 +11,7 @@ public class NombreComplexe {
         return reel;
     }
 
-    public void setReel(float reel) {
+    public void setReel(double reel) {
         this.reel = reel;
     }
 
@@ -19,7 +19,7 @@ public class NombreComplexe {
         return imaginaire;
     }
 
-    public void setImaginaire(float imaginaire) {
+    public void setImaginaire(double imaginaire) {
         this.imaginaire = imaginaire;
     }
 

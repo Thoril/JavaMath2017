@@ -1,7 +1,7 @@
 public class ListeNombresComplexes {
+
     private int taille;
     private NombreComplexe[] liste;
-
 
     public ListeNombresComplexes(int taille, NombreComplexe[] liste) {
         this.taille = taille;
@@ -27,13 +27,11 @@ public class ListeNombresComplexes {
         if(this.taille==1){
             //On copie le signal dans S
             S[0] = this.liste[0];
-            System.out.printf("Taille 1  Retour \n");
         }else{ //sinon on redivise la liste
-            System.out.printf("On redivise taille: %d \n", this.taille/2);
             NombreComplexe[] tabPaire = new NombreComplexe[this.taille/2];   //On declare la liste des éléments paires
             NombreComplexe[] tabImpaire = new NombreComplexe[this.taille/2];  //On declare la liste des éléments impaires
             //On crée les 2 listes a partir de la liste principale
-            for(int i=0;i<this.taille/2-1;i++){
+            for(int i=0;i<this.taille/2;i++){
                 tabPaire[i]=this.liste[2*i];
                 tabImpaire[i]=this.liste[2*i+1];
             }
@@ -44,10 +42,10 @@ public class ListeNombresComplexes {
             paire.FFT();
             impaire.FFT();
             //On initialise notre multiplicateur
-            NombreComplexe multi;
-            for(int i=0;i<this.taille/2-1;i++ ){
+            NombreComplexe multi = new NombreComplexe(0,0);
+            for(int i=0;i<this.taille/2;i++ ){
                 //On incremente le multiplicateur
-                multi = new NombreComplexe(2*Math.PI*i/this.taille,0);
+                multi.setReel(2*Math.PI*i/this.taille);
                 //Notre liste de retour prend la valeur de la liste paire pour la premiere moitié
                 S[i] = paire.getListe(i).plus((impaire.getListe(i)).fois(multi));
                 //Et la valeur de la liste impaire pour la seconde moitié
