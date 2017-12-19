@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class NombreComplexeTest {
     @org.junit.jupiter.api.Test
@@ -51,5 +52,9 @@ class NombreComplexeTest {
         NombreComplexe r = a.fois(b);
         assertTrue(r.getReel() == -18 && r.getImaginaire() == 26, "Erreur Multiplication Complexe");
     }
+
+
+
+
 
 }
