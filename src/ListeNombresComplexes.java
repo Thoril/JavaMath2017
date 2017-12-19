@@ -1,4 +1,3 @@
-
 public class ListeNombresComplexes {
 
     private int taille;
@@ -63,4 +62,31 @@ public class ListeNombresComplexes {
             }
         }
     }
+
+    public void iFFT() {
+        //Création d'un tableau de taille taille
+        this.sortie = new NombreComplexe[this.taille];
+
+        //Calcul du conjugué pour toutes les valeurs du tableau
+        for(int i=0; i<this.taille; i++){
+            this.sortie[i] = this.signalEntree[i].conjugue();
+        }
+
+        // Calcul de la transformée de fourier du tableau
+        this.sortie.FFT();
+
+        Calcul du conjugué pour les nouvelles valeurs
+        for(int i=0; i < n; i++){
+            this.sortie[i] = this.sortie[i].conjugue();
+        }
+
+        //Initialisation d'une multiplicateur avec la partie réel = n et img =0
+        NombreComplexe multi =  new NombreComplexe(n, 0);
+
+        //On divise chaque valeurs du tableau par 1/n car dans la transformée de fourier on multiplie par la taille du tableau
+        for(int i=0; i < n; i++){
+            this.sortie[i].fois(1/multi);
+        }
+    }
+
 }
