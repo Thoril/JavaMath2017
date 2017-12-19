@@ -1,3 +1,4 @@
+
 public class ListeNombresComplexes {
 
     private int taille;
@@ -39,17 +40,17 @@ public class ListeNombresComplexes {
             ListeNombresComplexes paire = new ListeNombresComplexes(this.taille/2, tabPaire);
             ListeNombresComplexes impaire = new ListeNombresComplexes(this.taille /2, tabImpaire);
             //On calcule la FFT des deux listes
-            paire.FFT();
-            impaire.FFT();
+            NombreComplexe[] Rpaire = paire.FFT();
+            NombreComplexe[] Rimpaire =  impaire.FFT();
             //On initialise notre multiplicateur
-            NombreComplexe multi = new NombreComplexe(0,0);
             for(int i=0;i<this.taille/2;i++ ){
                 //On incremente le multiplicateur
-                multi.setReel(2*Math.PI*i/this.taille);
+                double m = -2*Math.PI*i/this.taille;
+                NombreComplexe multi =  new NombreComplexe(Math.cos(m),Math.sin(m));
                 //Notre liste de retour prend la valeur de la liste paire pour la premiere moitié
-                S[i] = paire.getListe(i).plus((impaire.getListe(i)).fois(multi));
+                S[i] = Rpaire[i].plus(Rimpaire[i].fois(multi));
                 //Et la valeur de la liste impaire pour la seconde moitié
-                S[i+this.taille/2] = paire.getListe(i).moins((impaire.getListe(i)).fois(multi));
+                S[i+this.taille/2] = Rpaire[i].moins(Rimpaire[i].fois(multi));
             }
         }
         //On retourne notre liste S
