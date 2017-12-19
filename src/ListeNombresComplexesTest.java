@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Test;
-import org.junit.*;
 
 class ListeNombresComplexesTest {
     @Test
@@ -13,7 +12,7 @@ class ListeNombresComplexesTest {
         maListe.FFT();
         System.out.printf("Resu \n");
         for(int i= 0; i<8; i++){
-            maListe.getSortie(i).affiche();
+            maListe.getSortieFourier(i).affiche();
         }
 
     }
@@ -26,13 +25,12 @@ class ListeNombresComplexesTest {
             tab[i] = new NombreComplexe(1, 0);
         }
 
-        ListeNombresComplexesTest liste = new ListeNombresComplexes(3,tab);
-        liste.FFT();
+        ListeNombresComplexes liste = new ListeNombresComplexes(8,tab);
         liste.iFFT();
 
         System.out.printf("Resu \n");
         for(int i= 0; i<8; i++){
-            liste.getSortie(i).affiche();
+            liste.getSignalRetour(i).affiche();
         }
 
 
