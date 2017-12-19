@@ -49,4 +49,10 @@ public class NombreComplexe {
             System.out.printf("%.2f+i*%.2f\n", this.reel, this.imaginaire);
         }
     }
+
+    public NombreComplexe conjugue(){
+        double reel = this.reel;
+        double imaginaire  = -1* this.imaginaire;
+        return new NombreComplexe(reel, imaginaire);
+    }
 }
