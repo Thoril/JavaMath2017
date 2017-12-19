@@ -12,8 +12,27 @@ class ListeNombresComplexesTest {
         maListe.FFT();
         System.out.printf("Resu \n");
         for(int i= 0; i<8; i++){
-            maListe.getSortie(i).affiche();
+            maListe.getSortieFourier(i).affiche();
         }
+
+    }
+
+    @Test
+    public void iFFT(){
+
+        NombreComplexe[] tab = new NombreComplexe[8];
+        for(int i= 0; i<8; i++){
+            tab[i] = new NombreComplexe(1, 0);
+        }
+
+        ListeNombresComplexes liste = new ListeNombresComplexes(8,tab);
+        liste.iFFT();
+
+        System.out.printf("Resu \n");
+        for(int i= 0; i<8; i++){
+            liste.getSignalRetour(i).affiche();
+        }
+
 
     }
 

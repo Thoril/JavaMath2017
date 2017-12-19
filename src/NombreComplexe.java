@@ -7,7 +7,7 @@ public class NombreComplexe {
     private static final Logger log = Logger.getLogger(NombreComplexe.class);
 
     public NombreComplexe(double reel, double imaginaire) {
-        log.debug("This is debug");
+        //log.info("Creation d'un Nombre Complexe");
         this.reel = reel;
         this.imaginaire = imaginaire;
     }
