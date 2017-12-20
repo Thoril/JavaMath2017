@@ -37,6 +37,27 @@ class ListeNombresComplexesTest {
     }
 
     @Test
+    public void FFTsinus(){
+        NombreComplexe[] tab = new NombreComplexe[8];
+        for(int i = 0; i< tab.length; i++){
+            tab[i] = new NombreComplexe(Math.sin(2*Math.PI*i/tab.length),0);
+            System.out.println("Les valeurs du sinus sont : "+tab[i]);
+        }
+
+        ListeNombresComplexes liste = new ListeNombresComplexes(tab.length, tab);
+        liste.FFT();
+
+        float[][] res = {{0,0},{0,-4},{0,0},{0,0},{0,0},{0,0},{0,0},{0,4}};
+        for(int i = 0; i< tab.length; i++){
+            System.out.println("Les valeurs de la fft sont : "+liste.getSortieFourier(i));
+            assertEquals(res[i][0], liste.getSortieFourier(i).getReel(), Math.pow(10, -5)); //Precision a 10^-5
+            assertEquals(res[i][1], liste.getSortieFourier(i).getImaginaire(), Math.pow(10, -5));
+
+        }
+
+    }
+
+    @Test
     public void FFTImaginaireExpo(){
         NombreComplexe tabExp[] = new NombreComplexe[8];
         for (int indice=0 ; indice<tabExp.length; indice++){

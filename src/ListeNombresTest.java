@@ -1,12 +1,14 @@
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
+
+import java.util.logging.Level;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ListeNombresTest {
 
-
     @Test
-    void FFTconstante() {
+   public void FFTconstante() {
         double[] liste = new double[8];
         for(int i= 0; i<liste.length; i++){
             liste[i] = 1;
@@ -21,7 +23,7 @@ public class ListeNombresTest {
     }
 
     @Test
-    void FFTdirac() {
+    public void FFTdirac() {
         double[] liste = new double[8];
         for(int i= 0; i<liste.length; i++){
             liste[i] = 0;
@@ -35,21 +37,6 @@ public class ListeNombresTest {
             assertEquals(res[i], maListe.getSortieFourier(i), Math.pow(10, -5)); //Precision a 10^-5
         }
 
-    }
-
-    @Test
-    public void FFTImaginaireExpo(){
-        double tabExp[] = new double[8];
-        for (int indice=0 ; indice<tabExp.length; indice++){
-            tabExp[indice] = Math.cos(Math.PI * 2 *indice/(tabExp.length));
-        }
-        ListeNombres maListe = new ListeNombres(tabExp.length,tabExp);
-        maListe.FFT();
-        float res[]={0,8,0,0,0,0,0,0,0};
-
-        for (int i=0; i<tabExp.length; i++ ){
-            assertEquals(res[i], maListe.getSortieFourier(i), Math.pow(10, -5)); //Precision a 10^-5
-        }
     }
 
     @Test
