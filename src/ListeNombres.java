@@ -97,12 +97,9 @@ public class ListeNombres {
             this.signalRetour[i] = (maListe.getSortieFourier(i));
         }
 
-        //Initialisation d'une multiplicateur avec la partie réel = 1/n et img =0
-        double multi =  1.0/this.taille;
-
-        //On multiplie chaque valeurs du tableau par 1/n car dans la transformée de fourier on multiplie par la taille du tableau (n)
+        //On divise par la taille du tableau chaque valeurs car dans la transformée de fourier on multiplie par la taille du tableau (n)
         for(int i=0; i < this.taille; i++){
-            this.signalRetour[i] = this.signalRetour[i]*(multi);
+            this.signalRetour[i] = this.signalRetour[i]/this.taille;
         }
     }
 
