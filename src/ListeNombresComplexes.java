@@ -6,7 +6,7 @@ public class ListeNombresComplexes {
     private NombreComplexe[] signalRetour;
 
     public ListeNombresComplexes(int taille, NombreComplexe[] signal) {
-        if(taille<0 || taille%2 != 0 || taille != 1 ){
+        if(taille<0 || (taille%2 != 0 && taille != 1)){
             throw new IllegalStateException(" Taille non valide ");
         }
         if(signal.length != taille){
@@ -85,7 +85,6 @@ public class ListeNombresComplexes {
         //Calcul du conjugué pour toutes les valeurs du tableau
         for(int i=0; i<this.taille; i++){
             this.signalRetour[i] = this.sortieFourier[i].conjugue();
-            this.signalRetour[i].affiche();
         }
 
         ListeNombresComplexes maListe = new ListeNombresComplexes(this.taille , this.signalRetour);
