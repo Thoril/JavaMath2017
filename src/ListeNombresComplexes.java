@@ -6,6 +6,12 @@ public class ListeNombresComplexes {
     private NombreComplexe[] signalRetour;
 
     public ListeNombresComplexes(int taille, NombreComplexe[] signal) {
+        if(taille<0 || taille%2 != 0 || taille != 1 ){
+            throw new IllegalStateException(" Taille non valide ");
+        }
+        if(signal.length != taille){
+            throw new IllegalStateException(" La taille ne correspond pas au tableau ");
+        }
         this.taille = taille;
         this.signalEntree = signal;
     }
@@ -33,7 +39,6 @@ public class ListeNombresComplexes {
     public NombreComplexe getSignalRetour(int indice) {
         return signalRetour[indice];
     }
-
 
     public void FFT(){
         this.sortieFourier = new NombreComplexe[this.taille];
@@ -69,12 +74,18 @@ public class ListeNombresComplexes {
     }
 
     public void iFFT() {
+
+        //Verification si la sortie de Fourier est déja existante
+        if(this.sortieFourier == null){
+            this.FFT();
+        }
         //Création d'un tableau de taille taille
         this.signalRetour = new NombreComplexe[this.taille];
 
         //Calcul du conjugué pour toutes les valeurs du tableau
         for(int i=0; i<this.taille; i++){
-            this.signalRetour[i] = this.signalEntree[i].conjugue();
+            this.signalRetour[i] = this.sortieFourier[i].conjugue();
+            this.signalRetour[i].affiche();
         }
 
         ListeNombresComplexes maListe = new ListeNombresComplexes(this.taille , this.signalRetour);
@@ -86,7 +97,7 @@ public class ListeNombresComplexes {
             this.signalRetour[i] = (maListe.getSortieFourier(i)).conjugue();
         }
 
-        //Initialisation d'une multiplicateur avec la partie réel = n et img =0
+        //Initialisation d'une multiplicateur avec la partie réel = 1/n et img =0
         NombreComplexe multi =  new NombreComplexe(1.0/this.taille, 0);
 
         //On multiplie chaque valeurs du tableau par 1/n car dans la transformée de fourier on multiplie par la taille du tableau (n)
