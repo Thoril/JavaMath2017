@@ -18,6 +18,7 @@ class ListeNombresComplexesTest {
         }
 
     }
+
     @Test
     void FFTdirac() {
         NombreComplexe[] liste = new NombreComplexe[8];
@@ -109,6 +110,23 @@ class ListeNombresComplexesTest {
         for (int i=0; i<tab.length; i++ ){
             assertEquals(res[i][0], liste.getSignalRetour(i).getReel(), Math.pow(10, -5)); //Precision a 10^-5
             assertEquals(res[i][1], liste.getSignalRetour(i).getImaginaire(), Math.pow(10, -5));
+        }
+    }
+
+    @Test
+    public void iFFTDirac(){
+        NombreComplexe[] tab = new NombreComplexe[8];
+        for(int i= 0; i<tab.length; i++){
+            tab[i] = new NombreComplexe(0, 0);
+        }
+        tab[0].setReel(1);
+        ListeNombresComplexes liste = new ListeNombresComplexes(tab.length, tab);
+        liste.iFFT();
+        float res[][]={{1,0},{1,0},{1,0},{1,0},{1,0},{1,0},{1,0},{1,0}};
+
+        for (int i=0; i<tab.length; i++ ){
+            assertEquals(res[i][0], liste.getSortieFourier(i).getReel(), Math.pow(10, -5)); //Precision a 10^-5
+            assertEquals(res[i][1], liste.getSortieFourier(i).getImaginaire(), Math.pow(10, -5));
         }
     }
 
