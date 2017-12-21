@@ -6,6 +6,7 @@ public class ListeNombres {
     private double[] sortieFourier;
     private double[] signalRetour;
 
+    //Constructeur
     public ListeNombres(int taille, double[] signal) {
         if(taille<0 ||( taille%2 != 0 && taille != 1 )){
             throw new IllegalStateException(" Taille non valide ");
@@ -41,6 +42,7 @@ public class ListeNombres {
         return signalRetour[indice];
     }
 
+    //Fonction qui calcule la transformée de Fourier de réel
     public void FFT(){
         this.sortieFourier = new double[this.taille];
         //si la liste est de taille 1
@@ -74,6 +76,7 @@ public class ListeNombres {
         }
     }
 
+    //Fonction qui calcule l'inverse de la transformée de Fourier
     public void iFFT() {
 
         //Verification si la sortie de Fourier est déja existante
