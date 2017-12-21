@@ -1,3 +1,13 @@
+import javafx.embed.swing.JFXPanel;
+import javafx.stage.Stage;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -7,8 +17,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.FileFilter;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Fenetre extends JFrame implements ActionListener{
+public class Fenetre extends JFrame implements ActionListener, Observer{
 
     private JButton bouton1 = new JButton("Calculer");
     private JButton bouton2 = new JButton("Effacer");
@@ -18,6 +30,9 @@ public class Fenetre extends JFrame implements ActionListener{
     private JMenu test2 = new JMenu("Edition");
 
     private JMenuItem item1 = new JMenuItem("Ouvrir");
+
+    private JFreeChart jc;
+    private ChartPanel cp;
 
 
 
@@ -33,6 +48,23 @@ public class Fenetre extends JFrame implements ActionListener{
         JPanel sud = new JPanel();
         sud.add(bouton1);
         sud.add(bouton2);
+
+        JPanel centre = new JPanel();
+        JFreeChart chart = ChartFactory.createXYLineChart(
+                "Analyse Spectrale", "N", "Magnitude",
+                null, PlotOrientation.VERTICAL, true, true,false);
+        cp= new ChartPanel(chart) {
+
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(700, 500);
+            }
+        };
+        pack();
+
+        centre.add(cp);
+
+        this.add(centre,BorderLayout.CENTER);
 
         this.add(sud, BorderLayout.SOUTH);
 
@@ -52,7 +84,7 @@ public class Fenetre extends JFrame implements ActionListener{
         if(e.getSource() == item1){
             System.out.println("test");
             JFileChooser choix = new JFileChooser();
-            FileNameExtensionFilter MonFiltre = new FileNameExtensionFilter("Tableau", "csv");
+            FileNameExtensionFilter MonFiltre = new FileNameExtensionFilter("Fichier en .csv", "csv");
             choix.addChoosableFileFilter(MonFiltre);
             choix.setAcceptAllFileFilterUsed(false);
             int retour= choix.showOpenDialog(this);
@@ -62,5 +94,23 @@ public class Fenetre extends JFrame implements ActionListener{
                 System.out.println(chemin);
             }
         }
+    }
+
+
+    @Override
+    public void update(Observable o, Object arg) {
+       /* if(o instanceof FFT) {
+            FFT fft=(FFT)o;
+            XYSeries Goals = new XYSeries("Transformée de Fourier");
+            for (int i = 0; i<fft.getValeurs().length;i++)
+            {
+                Goals.add(i,fft.getValeursN(i).getModule());
+            }
+            XYDataset xyDataset = new XYSeriesCollection(Goals);
+            JFreeChart chart = ChartFactory.createXYLineChart(
+                    "Goals Scored Over Time", "N", "Magnitude",
+                    xyDataset, PlotOrientation.VERTICAL, true, false, false);
+            this.cp.setChart(chart); 
+        } */
     }
 }
