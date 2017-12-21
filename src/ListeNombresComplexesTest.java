@@ -21,21 +21,6 @@ class ListeNombresComplexesTest {
     }
 
     @Test
-    void FFT() {
-        NombreComplexe[] liste = new NombreComplexe[8];
-        for(int i= 0; i<liste.length; i++){
-            liste[i] = new NombreComplexe(i, 0);
-        }
-        ListeNombresComplexes maListe = new ListeNombresComplexes(liste.length, liste);
-        maListe.FFT();
-        double res[][]={{8,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0}};
-        for (int i=0; i<liste.length; i++ ){
-            maListe.getSortieFourier(i).affiche();
-        }
-
-    }
-
-    @Test
     void FFTdirac() {
         NombreComplexe[] liste = new NombreComplexe[8];
         for(int i= 0; i<liste.length; i++){
