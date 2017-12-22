@@ -1,7 +1,22 @@
-public class ListeNombresComplexes {
+import java.util.Observable;
+
+public class ListeNombresComplexes extends Observable{
 
     private int taille;
     private NombreComplexe[] signalEntree;
+
+    public NombreComplexe[] getSignalEntree() {
+        return signalEntree;
+    }
+
+    public NombreComplexe[] getSortieFourier() {
+        return sortieFourier;
+    }
+
+    public NombreComplexe[] getSignalRetour() {
+        return signalRetour;
+    }
+
     private NombreComplexe[] sortieFourier;
     private NombreComplexe[] signalRetour;
 
@@ -71,6 +86,7 @@ public class ListeNombresComplexes {
                 this.sortieFourier[i+this.taille/2] = (paire.getSortieFourier(i)).moins((impaire.getSortieFourier(i)).fois(multi));
             }
         }
+        this.notifyObservers();
     }
 
     public void iFFT() {
@@ -103,6 +119,15 @@ public class ListeNombresComplexes {
         for(int i=0; i < this.taille; i++){
            this.signalRetour[i] = this.signalRetour[i].fois(multi);
         }
+        this.notifyObservers();
+    }
+    /**
+     * Notifie les oberseveurs
+     */
+    @Override
+    public void notifyObservers() {
+        setChanged(); // Set the changed flag to true, otherwise observers won't be notified.
+        super.notifyObservers();
     }
 
 }

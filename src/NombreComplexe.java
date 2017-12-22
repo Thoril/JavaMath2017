@@ -68,4 +68,8 @@ public class NombreComplexe {
         double imaginaire  = -1* this.imaginaire;
         return new NombreComplexe(reel, imaginaire);
     }
+
+    public double module(){
+        return Math.sqrt(Math.pow(this.reel,2)+ Math.pow(this.imaginaire,2));
+    }
 }

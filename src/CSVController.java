@@ -42,10 +42,11 @@ public class CSVController {
                 indice++;
             }
 
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return tab;
     }
 
     public void write(String nom) {
