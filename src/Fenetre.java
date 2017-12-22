@@ -22,6 +22,9 @@ import java.util.Observer;
 
 public class Fenetre extends JFrame implements ActionListener, Observer{
 
+
+    private Controller controller;
+    private String chemin;
     private JButton bouton1 = new JButton("Calculer");
     private JButton bouton2 = new JButton("Effacer");
 
@@ -33,15 +36,17 @@ public class Fenetre extends JFrame implements ActionListener, Observer{
 
     private JFreeChart jc;
     private ChartPanel cp;
+    private int choixActuel;
 
 
 
-    public Fenetre(){
+    public Fenetre(Controller controllerP){
         this.setTitle("La Transformee de Fourier");
-        this.setSize(700, 800);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
+        this.controller=controllerP;
+
 
 
         //Bouton en borderlayout sud
@@ -57,7 +62,7 @@ public class Fenetre extends JFrame implements ActionListener, Observer{
 
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(700, 500);
+                return new Dimension(650, 500);
             }
         };
         pack();
@@ -69,19 +74,21 @@ public class Fenetre extends JFrame implements ActionListener, Observer{
         this.add(sud, BorderLayout.SOUTH);
 
         item1.addActionListener(this);
+        bouton1.addActionListener(this);
 
         //Menu
         this.fichier.add(item1);
         this.menuBar.add(fichier);
         this.setJMenuBar(menuBar);
 
-
+        this.setSize(700, 800);
         this.setVisible(true);
 
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == item1){
+            this.choixActuel = 1;
             System.out.println("test");
             JFileChooser choix = new JFileChooser();
             FileNameExtensionFilter MonFiltre = new FileNameExtensionFilter("Fichier en .csv", "csv");
@@ -89,28 +96,32 @@ public class Fenetre extends JFrame implements ActionListener, Observer{
             choix.setAcceptAllFileFilterUsed(false);
             int retour= choix.showOpenDialog(this);
             if(retour==JFileChooser.APPROVE_OPTION){
-                String chemin =choix.getSelectedFile().getAbsolutePath();
+                this.chemin =choix.getSelectedFile().getAbsolutePath();
                 System.out.print("Chemin: ");
-                System.out.println(chemin);
+
+                System.out.println(this.chemin);
             }
+        }
+        if(e.getSource() == bouton1){
+            this.controller.notifyAction(this.chemin,this.choixActuel);
         }
     }
 
 
     @Override
     public void update(Observable o, Object arg) {
-       /* if(o instanceof FFT) {
-            FFT fft=(FFT)o;
+        if(o instanceof ListeNombresComplexes) {
+            ListeNombresComplexes fft=(ListeNombresComplexes) o;
             XYSeries Goals = new XYSeries("Transformée de Fourier");
-            for (int i = 0; i<fft.getValeurs().length;i++)
+            for (int i = 0; i<fft.getSortieFourier().length;i++)
             {
-                Goals.add(i,fft.getValeursN(i).getModule());
+                Goals.add(i,fft.getSortieFourier(i).module());
             }
             XYDataset xyDataset = new XYSeriesCollection(Goals);
             JFreeChart chart = ChartFactory.createXYLineChart(
                     "Goals Scored Over Time", "N", "Magnitude",
                     xyDataset, PlotOrientation.VERTICAL, true, false, false);
-            this.cp.setChart(chart); 
-        } */
+            this.cp.setChart(chart);
+        }
     }
 }
