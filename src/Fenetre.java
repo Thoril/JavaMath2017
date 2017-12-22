@@ -4,6 +4,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
@@ -26,15 +28,12 @@ public class Fenetre extends JFrame implements ActionListener, Observer{
     private Controller controller;
     private String chemin;
     private JButton bouton1 = new JButton("Calculer");
-    private JButton bouton2 = new JButton("Effacer");
 
     private JMenuBar menuBar = new JMenuBar();
     private JMenu fichier = new JMenu("Fichier");
-    private JMenu test2 = new JMenu("Edition");
 
     private JMenuItem item1 = new JMenuItem("Ouvrir");
 
-    private JFreeChart jc;
     private ChartPanel cp;
     private int choixActuel;
 
@@ -42,7 +41,6 @@ public class Fenetre extends JFrame implements ActionListener, Observer{
 
     public Fenetre(Controller controllerP){
         this.setTitle("La Transformee de Fourier");
-        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
         this.controller=controllerP;
@@ -52,11 +50,10 @@ public class Fenetre extends JFrame implements ActionListener, Observer{
         //Bouton en borderlayout sud
         JPanel sud = new JPanel();
         sud.add(bouton1);
-        sud.add(bouton2);
 
         JPanel centre = new JPanel();
         JFreeChart chart = ChartFactory.createXYLineChart(
-                "Analyse Spectrale", "N", "Magnitude",
+                "Transformee de Fourier", "Taille", "Frequence",
                 null, PlotOrientation.VERTICAL, true, true,false);
         cp= new ChartPanel(chart) {
 
@@ -81,7 +78,8 @@ public class Fenetre extends JFrame implements ActionListener, Observer{
         this.menuBar.add(fichier);
         this.setJMenuBar(menuBar);
 
-        this.setSize(700, 800);
+        this.setSize(700, 600);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
 
     }
@@ -119,9 +117,14 @@ public class Fenetre extends JFrame implements ActionListener, Observer{
             }
             XYDataset xyDataset = new XYSeriesCollection(Goals);
             JFreeChart chart = ChartFactory.createXYLineChart(
-                    "Goals Scored Over Time", "N", "Magnitude",
+                    "Transformee de Fourier", "Taille", "Frequence",
                     xyDataset, PlotOrientation.VERTICAL, true, false, false);
+
+            XYPlot plot=chart.getXYPlot();
+            XYLineAndShapeRenderer renderer=new XYLineAndShapeRenderer(false,true);
+            plot.setRenderer(renderer);
             this.cp.setChart(chart);
+
         }
     }
 }

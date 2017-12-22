@@ -18,7 +18,7 @@ public class CSVController {
     public CSVController() {
     }
 
-    public NombreComplexe[] read(String adresse) {
+    public void read(String adresse) {
         String line = "";
         int indice = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(adresse))) {
@@ -45,7 +45,7 @@ public class CSVController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return tab;
+       
     }
 
     public void write(String nom) {
