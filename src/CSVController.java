@@ -3,22 +3,40 @@ import java.io.*;
 public class CSVController {
     private NombreComplexe tab[];
 
+    /**
+     * Récupère un tableau de nombre complexe
+     * @return tab
+     */
     public NombreComplexe[] getTab() {
         return tab;
     }
 
+    /**
+     * Initialise un tableau de nombre complexe
+     * @param tab
+     */
     public void setTab(NombreComplexe[] tab) {
         this.tab = tab;
     }
 
+    /**
+     * Constructeur du controller csv
+     * @param tab
+     */
     public CSVController(NombreComplexe[] tab) {
         this.tab = tab;
     }
 
+    /**
+     * Constructeur du controller
+     */
     public CSVController() {
     }
 
-    
+    /**
+     * Fonction qui permet de lire un fichier csv
+     * @param adresse
+     */
     public void read(String adresse) {
         String line = "";
         int indice = 0;
@@ -46,9 +64,12 @@ public class CSVController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return tab;
     }
 
+    /**
+     * Fonction qui prmet d'écrire dans un fichier csv
+     * @param nom
+     */
     public void write(String nom) {
         try{
             File ff=new File(nom+".csv"); // définir l'arborescence

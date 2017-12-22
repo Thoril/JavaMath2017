@@ -6,7 +6,11 @@ public class ListeNombres {
     private double[] sortieFourier;
     private double[] signalRetour;
 
-    //Constructeur
+    /**
+     * Constructeur de notre classe
+     * @param taille
+     * @param signal
+     */
     public ListeNombres(int taille, double[] signal) {
         if(taille<0 ||( taille%2 != 0 && taille != 1 )){
             throw new IllegalStateException(" Taille non valide ");
@@ -18,31 +22,60 @@ public class ListeNombres {
         this.signalEntree = signal;
     }
 
+    /**
+     * Rcéupère la taille d'un tableau
+     * @return taille
+     */
     public int getTaille() {
         return taille;
     }
 
+    /**
+     * Initialise la taille d'un tableau
+     * @param taille
+     */
     public void setTaille(int taille) {
         this.taille = taille;
     }
 
+    /**
+     * Récupère un signal d'entrée
+     * @param indice
+     * @return signalEntree[indice]
+     */
     public double getSignalEntree(int indice) {
         return signalEntree[indice];
     }
 
+    /**
+     * Initialise un signal d'entrée
+     * @param signalEntree
+     */
     public void setSignalEntree(double[] signalEntree) {
         this.signalEntree = signalEntree;
     }
 
+    /**
+     * Récupère un signal de sortie après la transformée de Fourier
+     * @param indice
+     * @return sortieFourier[indice]
+     */
     public double getSortieFourier(int indice) {
         return sortieFourier[indice];
     }
 
+    /**
+     * Récupère un signal de retour
+     * @param indice
+     * @return sigalRetour[indice]
+     */
     public double getSignalRetour(int indice) {
         return signalRetour[indice];
     }
 
-    //Fonction qui calcule la transformée de Fourier de réel
+    /**
+     * Fonction qui calcule la transformée de Fourier d'un tableau de nombre réel
+     */
     public void FFT(){
         this.sortieFourier = new double[this.taille];
         //si la liste est de taille 1
@@ -76,7 +109,9 @@ public class ListeNombres {
         }
     }
 
-    //Fonction qui calcule l'inverse de la transformée de Fourier
+    /**
+     * Fonction qui calcule l'inverse de la transformée de fourier d'un tableau de nombres réels
+     */
     public void iFFT() {
 
         //Verification si la sortie de Fourier est déja existante

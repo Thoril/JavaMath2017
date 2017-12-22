@@ -38,7 +38,10 @@ public class Fenetre extends JFrame implements ActionListener, Observer{
     private int choixActuel;
 
 
-
+    /**
+     * Controller de notre classe
+     * @param controllerP
+     */
     public Fenetre(Controller controllerP){
         this.setTitle("La Transformee de Fourier");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,6 +86,11 @@ public class Fenetre extends JFrame implements ActionListener, Observer{
         this.setVisible(true);
 
     }
+
+    /**
+     * Traite les données des listeners
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == item1){
@@ -105,7 +113,11 @@ public class Fenetre extends JFrame implements ActionListener, Observer{
         }
     }
 
-
+    /**
+     * Fonction qui met à jour l'interface graphique en fonction des données entrants
+     * @param o
+     * @param arg
+     */
     @Override
     public void update(Observable o, Object arg) {
         if(o instanceof ListeNombresComplexes) {

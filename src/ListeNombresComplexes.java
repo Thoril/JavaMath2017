@@ -4,22 +4,39 @@ public class ListeNombresComplexes extends Observable{
 
     private int taille;
     private NombreComplexe[] signalEntree;
+    private NombreComplexe[] sortieFourier;
+    private NombreComplexe[] signalRetour;
 
+    /**
+     * Récupère un signal d'entree d'un tableau de nombre complexe
+     * @return signalEntree
+     */
     public NombreComplexe[] getSignalEntree() {
         return signalEntree;
     }
 
+    /**
+     * Récupère un signal de sortie sous la forme d'un tableau de nombre complexe
+     * @return sortieFourier
+     */
     public NombreComplexe[] getSortieFourier() {
         return sortieFourier;
     }
 
+    /**
+     * Récupère un signal de retour sous la forme d'un tableau de nombre complexe
+     * @return signalRetour
+     */
     public NombreComplexe[] getSignalRetour() {
         return signalRetour;
     }
 
-    private NombreComplexe[] sortieFourier;
-    private NombreComplexe[] signalRetour;
 
+    /**
+     * Controleur de la classe
+     * @param taille
+     * @param signal
+     */
     public ListeNombresComplexes(int taille, NombreComplexe[] signal) {
         if(taille<0 || (taille%2 != 0 && taille != 1)){
             throw new IllegalStateException(" Taille non valide ");
@@ -31,30 +48,60 @@ public class ListeNombresComplexes extends Observable{
         this.signalEntree = signal;
     }
 
+    /**
+     * Récupère la taille
+     * @return taille
+     */
     public int getTaille() {
         return taille;
     }
 
+    /**
+     * Initialise la taille
+     * @param taille
+     */
     public void setTaille(int taille) {
         this.taille = taille;
     }
 
+    /**
+     * Récupère un signal d'entree
+     * @param indice
+     * @return signalEntree[indice]
+     */
     public NombreComplexe getSignalEntree(int indice) {
         return signalEntree[indice];
     }
 
+    /**
+     * Initialise un signal d'entree
+     * @param signalEntree
+     */
     public void setSignalEntree(NombreComplexe[] signalEntree) {
         this.signalEntree = signalEntree;
     }
 
+    /**
+     * Récupère la sortie d'un signal de Fourier
+     * @param indice
+     * @return sortieFourier[indice]
+     */
     public NombreComplexe getSortieFourier(int indice) {
         return sortieFourier[indice];
     }
 
+    /**
+     * Récupère la sortie d'un signal retour
+     * @param indice
+     * @return signalRetour[indice]
+     */
     public NombreComplexe getSignalRetour(int indice) {
         return signalRetour[indice];
     }
 
+    /**
+     * Calcule la transformée de Fourier d'un tableau de nombre complexe
+     */
     public void FFT(){
         this.sortieFourier = new NombreComplexe[this.taille];
         //si la liste est de taille 1
@@ -89,6 +136,9 @@ public class ListeNombresComplexes extends Observable{
         this.notifyObservers();
     }
 
+    /**
+     * Calcule l'inverse de la transformée de Fourier d'un tableau de nombres complexes
+     */
     public void iFFT() {
 
         //Verification si la sortie de Fourier est déja existante
@@ -122,7 +172,7 @@ public class ListeNombresComplexes extends Observable{
         this.notifyObservers();
     }
     /**
-     * Notifie les oberseveurs
+     * Notifie les observeurs
      */
     @Override
     public void notifyObservers() {

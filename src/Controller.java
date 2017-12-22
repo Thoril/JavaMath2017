@@ -5,6 +5,10 @@ public class Controller {
     private ListeNombresComplexes fft;
     private Fenetre fen;
 
+    /**
+     * Initialise une liste de nombres complexe avec un signal de fourier
+     * @param fft
+     */
     public void setFft(ListeNombresComplexes fft) {
         this.fft = fft;
     }
@@ -13,14 +17,27 @@ public class Controller {
         return fen;
     }
 
+    /**
+     * Initialise la fenetre graphique
+     * @param fen
+     */
     public void setFen(Fenetre fen) {
         this.fen = fen;
     }
 
+    /**
+     * Controller de notre classe
+     * @param model
+     */
     public Controller(ListeNombresComplexes model){
         this.fft=model;
     }
 
+    /**
+     * Ouvre un fichier csv dans notre fenêtre graphique
+     * @param adresse
+     * @param choix
+     */
     public void notifyAction(String adresse,int choix)
     {
         try {
